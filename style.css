@@ -1,0 +1,55 @@
+body {
+    font-family: Arial;
+    text-align: center;
+    background: linear-gradient(to right, #667eea, #764ba2);
+    color: white;
+}
+
+.container {
+    margin-top: 80px;
+}
+
+button, select, input {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+button {
+    background: #ff4757;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #ff6b81;
+}
+
+.game-box {
+    display: none;
+    background: white;
+    color: black;
+    padding: 20px;
+    width: 350px;
+    margin: 30px auto;
+    border-radius: 10px;
+}
+
+#puzzleContainer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.puzzleBtn {
+    width: 60px;
+    height: 60px;
+    font-size: 20px;
+    cursor: pointer;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+}
