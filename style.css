@@ -53,3 +53,12 @@ button:hover {
     border: none;
     border-radius: 8px;
 }
+.stopBtn{
+margin-top:15px;
+padding:10px 20px;
+background:rgb(33, 159, 16);
+color:rgb(237, 225, 225);
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
