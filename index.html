@@ -1,17 +1,17 @@
-<h1>⏰ Puzzle Alarm</h1>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Puzzle Alarm</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="container">
     <h1>⏰ Puzzle Alarm</h1>
 
     <input type="time" id="alarmTime">
-    
+
     <select id="ampm">
         <option value="AM">AM</option>
         <option value="PM">PM</option>
@@ -22,17 +22,31 @@
     <h2 id="status"></h2>
 </div>
 
+
 <!-- Puzzle Game -->
-<div id="gameBox" class="game-box">
+<div id="gameBox" class="game-box" style="display:none">
+
     <h2>Solve Puzzle To Stop Alarm</h2>
+
     <p>Click numbers in order: 1 → 2 → 3 → 4 → 5</p>
+
     <div id="puzzleContainer"></div>
+
+    <!-- Manual Stop Button -->
+    <button onclick="manualStop()" id="stopBtn" class="stopBtn">
+        Stop Alarm
+    </button>
+
 </div>
 
+
+<!-- Alarm Sound -->
 <audio id="alarmSound" loop>
     <source src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg">
 </audio>
 
+
 <script src="script.js"></script>
+
 </body>
 </html>
