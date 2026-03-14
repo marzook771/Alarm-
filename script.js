@@ -3,9 +3,11 @@ let alarmPeriod = "";
 let expectedNumber = 1;
 let alarmInterval;
 let canClick = true;
+let volumeInterval;
 
 // SET ALARM
 function setAlarm() {
+
     alarmTime = document.getElementById("alarmTime").value;
     alarmPeriod = document.getElementById("ampm").value;
 
@@ -15,8 +17,10 @@ function setAlarm() {
     checkAlarm();
 }
 
-// CHECK TIME
+
+// CHECK CURRENT TIME
 function checkAlarm() {
+
     alarmInterval = setInterval(() => {
 
         let now = new Date();
@@ -33,21 +37,60 @@ function checkAlarm() {
             String(minutes).padStart(2, '0');
 
         if (formattedTime === alarmTime && currentPeriod === alarmPeriod) {
+
             startAlarm();
+
         }
 
     }, 1000);
+
 }
+
 
 // START ALARM
 function startAlarm() {
+
     clearInterval(alarmInterval);
 
-    document.getElementById("alarmSound").play();
+    let alarm = document.getElementById("alarmSound");
+
+    alarm.volume = 1;
+    alarm.play();
+
     document.getElementById("gameBox").style.display = "block";
 
     createPuzzle();
+
+    let stopButton = document.getElementById("stopBtn");
+
+    stopButton.style.display = "none";
+
+    // show stop button after 20 seconds
+    setTimeout(() => {
+
+        stopButton.style.display = "block";
+
+        // hide after 10 seconds
+        setTimeout(() => {
+
+            stopButton.style.display = "none";
+
+        }, 20000);
+
+    }, 20000);
+
+
+    // FORCE VOLUME TO MAX
+    volumeInterval = setInterval(() => {
+
+        if (alarm.volume !== 1) {
+            alarm.volume = 1;
+        }
+
+    }, 1000);
+
 }
+
 
 // CREATE PUZZLE
 function createPuzzle() {
@@ -75,9 +118,10 @@ function createPuzzle() {
         container.appendChild(btn);
 
     });
+
 }
 
-// PUZZLE CHECK WITH 30 SECOND DELAY
+
 function checkPuzzle(num, btn) {
 
     if (!canClick) return;
@@ -91,10 +135,10 @@ function checkPuzzle(num, btn) {
 
         expectedNumber++;
 
-        // WAIT 30 SECONDS BEFORE NEXT CLICK
+        // wait 15 seconds before next number
         setTimeout(() => {
             canClick = true;
-        }, 30000);
+        }, 15000);
 
         if (expectedNumber > 5) {
 
@@ -105,17 +149,42 @@ function checkPuzzle(num, btn) {
     } 
     else {
 
-        alert("❌ Wrong order! Restarting puzzle.");
+        alert("❌ Wrong number! Puzzle restarting from 1.");
+
+        // reset puzzle completely
+        expectedNumber = 1;
 
         createPuzzle();
 
     }
+
 }
 
-// STOP ALARM
+
+// MANUAL STOP
+function manualStop(){
+
+    let alarm = document.getElementById("alarmSound");
+
+    alarm.pause();
+
+    clearInterval(volumeInterval);
+
+    document.getElementById("gameBox").style.display = "none";
+
+    alert("Alarm stopped manually");
+
+}
+
+
+// STOP ALARM AFTER PUZZLE
 function stopAlarm() {
 
-    document.getElementById("alarmSound").pause();
+    let alarm = document.getElementById("alarmSound");
+
+    alarm.pause();
+
+    clearInterval(volumeInterval);
 
     document.getElementById("gameBox").style.display = "none";
 
